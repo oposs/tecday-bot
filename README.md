@@ -12,11 +12,19 @@ python3 -m venv venv
 source venv/bin/activate
 
 # install requirements
+
 pip install -r requirements.txt
 
 # start server + bot
+
 TOKEN=<telegram_api_token> python3 src/bot.py
 TOKEN=<telegram_api_token> python3 src/server.py
+
+# alternative: start sanic bot
+
+cp sanicbot/config.dist.py sanicbot/config.py
+edit sanicbot/config.py
+./run_sanicbot.sh
 
 ```
 
