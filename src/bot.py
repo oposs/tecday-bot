@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import os
 from uuid import uuid4
-
 from aiogram import Bot, Dispatcher, executor, types
 
 TOKEN = os.environ['TELEGRAM_API_TOKEN']
@@ -9,7 +8,7 @@ TOKEN = os.environ['TELEGRAM_API_TOKEN']
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
-SHORTGAME_NAME = 'tecdaysteststacker'
+SHORTGAME_NAME = 'game1'
 BASE_URL = 'https://tecdays0.oetiker.ch/public/snake.html'
 
 

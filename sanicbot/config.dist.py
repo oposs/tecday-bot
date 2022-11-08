@@ -1,0 +1,6 @@
+APP_URL = "https://xxxx.ch"
+BOT_TOKEN = "xxxxxx"
+BOT_WEBHOOK_PATH = f"/bot/{BOT_TOKEN}"
+BOT_WEBHOOK_URL = f"{APP_URL}{BOT_WEBHOOK_PATH}"
+GAME_URL = f"{APP_URL}/public/snake.html"
+SHORTGAME_NAME = f"game1"
