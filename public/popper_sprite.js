@@ -1,5 +1,6 @@
 
 import { setCss, newEl } from './popper_util.js';
+import Score from './popper_score.js';
 
 export default class Sprite {
     static #screenWidth = window.innerWidth;
@@ -13,8 +14,8 @@ export default class Sprite {
     #el;
     #score;
 
-    constructor (score) {
-        this.#score = score;
+    constructor () {
+        this.#score = new Score();
         let r = 30;
         this.#x = Math.random() * (Sprite.#screenWidth - 4 * r) + r;
         this.#y = -2 * r;

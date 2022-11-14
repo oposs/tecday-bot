@@ -27,7 +27,9 @@ export default class GameOver {
             lineHeight: '300px',
             zIndex: '20'
         });
-        GameOver.#el.innerText = (new Score()).value;
+        GameOver.#el.innerText = 'Score: ' + (new Score()).value;
+
+        // Report Score to Telegram
         const urlParams = new URLSearchParams(window.location.search);
         const uid = urlParams.get('uid');
         const mid = urlParams.get('mid');
