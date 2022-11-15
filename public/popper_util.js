@@ -6,9 +6,9 @@ export function setCss(el, map) {
     return el;
 }
 
-export function newEl(tag, map) {
+export function newEl(tag, map, parent = document.body) {
     let el = document.createElement(tag);
-    document.body.append(el);
+    parent.append(el);
     setCss(el, map);
     return el;
 }

@@ -1,10 +1,13 @@
 
 import { setCss, newEl } from './popper_util.js';
 import Score from './popper_score.js';
+import SpriteStore from './popper_spritestore.js';
 
 export default class Sprite {
     static #screenWidth = window.innerWidth;
     static #screenHeight = window.innerHeight;
+    static #score = new Score();
+    static #ss = new SpriteStore();
     #type = Math.random() > 0.5 ? 'good' : 'bad';
     #speed = Math.random() * 10 + 5;
     #alive = true;
@@ -12,10 +15,8 @@ export default class Sprite {
     #x;
     #y;
     #el;
-    #score;
 
-    constructor () {
-        this.#score = new Score();
+    constructor() {
         let r = 30;
         this.#x = Math.random() * (Sprite.#screenWidth - 4 * r) + r;
         this.#y = -2 * r;
@@ -28,39 +29,39 @@ export default class Sprite {
             transform: 'rotate(134deg)',
             width: (r * 2) + 'px',
             height: (r * 2) + 'px',
-            backgroundColor: this.#type == 'bad' ? 'rgba(255,50,255,1)' : 'rgba(0,200,0,1)',
+            backgroundColor: this.#type == 'bad' 
+            ? 'rgba(255,50,255,1)' 
+            : 'rgba(0,200,0,1)',
             transition: 'transform 0.5s, background-color 0.5s',
             zIndex: 10,
         });
         this.#el.addEventListener('pointerdown', (e) => {
             e.preventDefault();
-            this.explode(this.#type);
+            this.explode();
         });
     }
 
 
-    next () {
+    step() {
         this.#y += Math.round(this.#speed);
-        if (this.#y > Sprite.#screenHeight) {
-            if (this.#type == 'good') {
-                this.#score.up();
-            }
-            else {
-                this.explode('final');
-                return true;
-            }
-        }
-        if (!this.gameOver && this.#y > Sprite.#screenHeight || !this.#alive) {
-            this.#el.remove();
-            return false;
-        }
         setCss(this.#el, {
             top: this.#y + 'px',
         });
-        return true;
+        if (this.#y > Sprite.#screenHeight) {
+            if (this.#type == 'good') {
+                Sprite.#score.up();
+                this.remove();
+            }
+            else {
+                this.explode('final');
+            }
+        }
     }
-
-    explode (type = this.#type) {
+    remove() {
+        this.#el.remove();
+        Sprite.#ss.delete(this);
+    }
+    explode(type = this.#type) {
 
         switch (type) {
             case 'bad':
@@ -85,12 +86,16 @@ export default class Sprite {
                 });
                 break;
         }
-        setTimeout(() => {
-            this.#alive = false;
-            if (type != 'bad') {
-                this.gameOver = true;
+        this.#el.addEventListener('transitionend', (e) => {
+            this.remove();
+            if (type == 'good' || type == 'final') {
+                Sprite.#ss.forEach((sprite) => {
+                    sprite.remove();
+                });
             }
-        }, 600);
+        }, {
+            once: true
+        });
     }
-    
+
 }

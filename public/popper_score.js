@@ -10,7 +10,6 @@ export default class Score {
         fontFamily: 'sans-serif',
         fontSize: '30px',
         height: '30px',
-        width: '400px',
     });
     constructor () {
         if (! Score.#instance ) {
