@@ -22,7 +22,7 @@ export default class GameOver {
             width: '100%',
             height: '100%',
             fontFamily: 'sans-serif',
-            fontSize: '100px',
+            fontSize: '10vw',
             backdropFilter: 'blur(5px)',
             backgroundColor: 'rgba(0,0,0,0.8)',
             color: '#fff',
@@ -33,13 +33,13 @@ export default class GameOver {
         });
         GameOver.#scoreEl = newEl('div',{
             position: 'absolute',
-            top: '20%',
+            top: '20vh',
             width: '100%',
             textAlign: 'center'
         },root)
         let restart = newEl('div', {
             position: 'absolute',
-            bottom: '30%',
+            bottom: '30vh',
             width: '100%',
             textAlign: 'center'
         },root);
