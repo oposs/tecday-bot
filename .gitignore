@@ -1,8 +1,7 @@
 venv
 .idea
 tecdays-bot.iml
-config.conf
-config.py
+config.ini
 *~
 __pycache__
 *.pyc

@@ -1,0 +1,6 @@
+[DEFAULT]
+# No trailing slash!
+APP_URL = https://xxxx.ch
+BOT_TOKEN = xxxxxx
+GAME_URL = https://xxxx.ch/public/games/popper.html
+SHORTGAME_NAME = game1

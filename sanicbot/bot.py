@@ -21,7 +21,8 @@ def get_dp() -> Dispatcher:
 def register(app: Sanic):
     # get bot_token from app.config
     token = app.config["BOT_TOKEN"]
-    webhook_url = app.config["BOT_WEBHOOK_URL"]
+    app_url = app.config["APP_URL"]
+    webhook_url = f"{app_url}/bot/{token}"
 
     # define instance
     bot = Bot(token)
@@ -32,17 +33,17 @@ def register(app: Sanic):
     async def on_message(message: Message):
         await message.reply("Hello " + message.text)
 
-    @dp.callback_query_handler(lambda callback_query: callback_query.game_short_name == app.config['SHORTGAME_NAME'])
+    @dp.callback_query_handler(lambda callback_query: callback_query.game_short_name == app.config["SHORTGAME_NAME"])
     async def send_game(callback_query: types.CallbackQuery):
-        uid = str(callback_query.from_user.id)
+        user_id = str(callback_query.from_user.id)
         if callback_query.message:
-            mid = str(callback_query.message)
-            cid = str(callback_query.id)
+            message_id = str(callback_query.message)
+            chat_id = str(callback_query.id)
             url = "{}?uid={}&mid={}&cid={}".format(
-                app.config["GAME_URL"], uid, mid, cid)
+                app.config["GAME_URL"], user_id, message_id, chat_id)
         else:
             imid = callback_query.inline_message_id
-            url = "{}?uid={}&imid={}".format(app.config["GAME_URL"], uid, imid)
+            url = "{}?uid={}&imid={}".format(app.config["GAME_URL"], user_id, imid)
         await bot.answer_callback_query(callback_query.id, url=url)
         logger.info("send_game {}".format(url))
 
@@ -52,7 +53,7 @@ def register(app: Sanic):
             inline_query.id,
             [types.InlineQueryResultGame(
                 id=str(uuid4()),
-                game_short_name=app.config['SHORTGAME_NAME'])])
+                game_short_name=app.config["SHORTGAME_NAME"])])
         logger.info("send_game inline")
 
     # set webhook url on startup
