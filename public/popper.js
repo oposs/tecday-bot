@@ -8,7 +8,7 @@ function main (e) {
     let ss = new SpriteStore();
     ss.add(new Sprite());
     let go = new GameOver();
-    go.main = main;
+    go.startGame = main;
     let loopId = setInterval(() => {
         if (Math.random() > 0.9) {
             ss.add(new Sprite());

@@ -5,7 +5,7 @@ export default class GameOver {
     static #instance;
     static #rootEl;
     static #scoreEl;
-    static #main;
+    static #startGame;
     static #score = new Score();
     constructor () {
         if (! GameOver.#instance ) {
@@ -49,7 +49,7 @@ export default class GameOver {
         restart.addEventListener('click',(e) => {
             // no recursion on restart
             this.hide();
-            setTimeout(GameOver.#main(),0);
+            setTimeout(GameOver.#startGame(),0);
         });       
     }
     show () {
@@ -60,8 +60,8 @@ export default class GameOver {
     hide () {
         GameOver.#rootEl.style.visibility = 'hidden';
     }
-    set main (value) {
-        GameOver.#main = value;
+    set startGame (value) {
+        GameOver.#startGame = value;
     }
     #reportScore () {
         const urlParams = new URLSearchParams(window.location.search);
