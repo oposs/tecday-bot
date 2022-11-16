@@ -1,2 +1,3 @@
 aiogram
 sanic[ext]
+jinja2
