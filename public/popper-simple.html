@@ -1,12 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Popper Simpler</title>
+    <title>Popper Simple</title>
+    <style>
+        html,
+        body {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overscroll-behavior: none;
+            -webkeit-overflow-scrolling: touch;
+            touch-action: none;
+            padding: 0;
+            margin: 0;
+            -webkit-user-select: none;
+            user-select: none;
+            user-zoom: fixed;
+        }
+
+        .sprite {
+            background-color: rgba(52, 216, 30, 1);
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+            border-style: solid;
+            border-width: 1px;
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+            transform: scale(1);
+            transition:
+                transform 0.2s, background-color 0.2s;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            text-align: center;
+            padding-top:  18px;
+            font-size: 20px;
+            font-family: sans-serif;
+            box-sizing: border-box;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const sprites = document.getElementsByClassName("sprite");
+            let expect = sprites.length;
+            for (let i = 0; i < sprites.length; i++) {
+                const sprite = sprites[i];
+                sprite._data = {
+                    speed: Math.random() * 10+3,
+                    x: 0,
+                };
+                sprite.innerText = i;
+                sprite.style.top=`${sprite._data.x}px`;
+                sprite.style.left = `${Math.random() * 90 + 5}%`;
+                sprite.addEventListener('click', (e) => {
+                    if (sprites.length - 1 != i) {
+                        sprite.style.backgroundColor = "rgba(255, 0, 0, 1)";
+                        return;
+                    }
+                    sprite.style.transform = 'scale(10)';
+                    sprite.style.backgroundColor = 'rgba(52,216,30,0)';
+                    sprite.style.borderStyle = 'none';
+                    sprite.style.boxShadow = 'none';
+                    sprite.innerText = 'X';
+                    sprite.addEventListener('transitionend', () => {
+                        sprite.remove();
+                    }, { once: true });
+                }, { once: true });
+            }
+            let timer = setInterval(() => {
+                for (let i = sprites.length-1; i >= 0 ; i--) {
+                    const sprite = sprites[i];
+                    sprite._data.x += sprite._data.speed;
+                    sprite.style.top = `${sprite._data.x}px`;
+                    if (0 + sprite.dataset.x > window.innerHeight) {
+                        sprite.remove();
+                    }
+                }
+                if (sprites.length == 0) {
+                    clearInterval(timer);
+                }
+            }, 1000/10);
+        });
+    </script>
 </head>
+
 <body>
-    
+    <div class="container">
+        <div id="timer"></div>
+        <div class="sprite"></div>
+        <div class="sprite"></div>
+        <div class="sprite"></div>
+        <div class="sprite"></div>
+        <div class="sprite"></div>
+        <div class="sprite"></div>
+        <div class="sprite"></div>
+        <div class="sprite"></div>
+        <div class="sprite"></div>
+        <div class="sprite"></div>
+    </div>
 </body>
+
 </html>

@@ -25,7 +25,8 @@ export default class Sprite {
             top: this.#y + 'px',
             left: this.#x + 'px',
             transform: 'scale(1)',
-            borderRadius: this.#type == 'good' ? r + 'px' : '0px',
+            borderRadius: this.#type == 'good' 
+                ? '50%' : '0px',
             transform: 'rotate(134deg)',
             width: (r * 2) + 'px',
             height: (r * 2) + 'px',
