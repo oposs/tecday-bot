@@ -40,7 +40,7 @@ async def feed(request: Request, ws: Websocket):
 
 @app.route('/qr')
 async def handle_request(request):
-    return await render("index.html", context={}, status=200)
+    return await render("index.html", context={'counter': app.ctx.current_counter}, status=200)
 
 
 app.run(host="0.0.0.0", port=8090)

@@ -22,7 +22,7 @@
     ws.onmessage = event => {
         let data = JSON.parse(event.data);
         console.log(data);
-        document.getElementById('ctr').innerHTML = data.counter;
+        document.getElementById('ctr').innerText = data.counter;
     }
 </script>
 <body>
@@ -489,7 +489,7 @@
                 </svg>
             </td>
             <td>
-                <div id="ctr">0</div>
+                <div id="ctr">{{ counter }}</div>
             </td>
         </tr>
     </table>

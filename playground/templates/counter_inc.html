@@ -2,9 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Success</title>
 </head>
 <body>
-<p>{{ context.counter }} Personen waren schneller als Du</p>
+{% if counter == 0 %}
+🎉 Gratuliere, Du warst am schnellsten! 🎉
+{% elif counter == 1 %}
+<p>{{ counter }} Person waren schneller als Du 😭 </p>
+{% else %}
+<p>{{ counter }} Personen waren schneller als Du 😭 </p>
+{% endif %}
 </body>
 </html>
