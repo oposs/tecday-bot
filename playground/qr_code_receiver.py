@@ -1,22 +1,43 @@
 from sanic import Sanic, response, Request, Websocket, text
+import json
 
 app = Sanic("TecDaysQRReceiver")
+app.ctx.open_web_sockets = {}
+app.ctx.current_counter = 0
 
 
-@app.get("/counter_inc")
-async def send_msg(request):
-    await app.ctx.current_ws.send('inc')
-    return text("OK")
+@app.get("/qr/counter_inc")
+async def inc_counter(request: Request):
+    app.ctx.current_counter = app.ctx.current_counter + 1
+    to_remove = []
+    for ws in app.ctx.open_web_sockets.values():
+        try:
+            await ws.send(json.dumps({
+                'counter': app.ctx.current_counter,
+                'user-agent': request.headers.get('User-Agent'),
+                'remote-ip': request.headers.get('X-Forwarded-For')
+            }))
+        except Exception:
+            to_remove.append(ws)
+    for ws in to_remove:
+        del app.ctx.open_web_sockets[ws]
+    return text('OK')
 
 
-@app.websocket("/feed")
+@app.get("/qr/counter_reset")
+async def reset_counter(request):
+    app.ctx.current_counter = 0
+    return text("OK counter reset")
+
+
+@app.websocket("/qr/feed")
 async def feed(request: Request, ws: Websocket):
-    app.ctx.current_ws = ws
+    app.ctx.open_web_sockets[ws] = ws
     async for msg in ws:
         await ws.send(msg)
 
 
-@app.route('/')
+@app.route('/qr')
 async def handle_request(request):
     return response.html("""
 <!DOCTYPE html>
@@ -35,7 +56,7 @@ async def handle_request(request):
     }
 </style>
 <script>
-    const ws = new WebSocket("ws://" + location.host + '/feed');
+    const ws = new WebSocket("wss://" + location.host + '/qr/feed');
     ws.onmessage = event => {
         console.log(event.data);
         let count = document.getElementById('ctr').innerHTML;
@@ -52,4 +73,4 @@ async def handle_request(request):
     """)
 
 
-app.run(host="0.0.0.0", port=8000)
+app.run(host="0.0.0.0", port=8090)
