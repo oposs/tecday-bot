@@ -28,3 +28,14 @@ edit sanicbot/config.py
 
 ```
 
+## Bot erstellen
+- Mit @botfather eine Konversation starten
+- `/start`
+- `/newbot` - Anweisungen folgen
+- Token Aufschreiben
+
+## Game registrieren
+- Mit @botfather eine Konversation starten
+- `/setinline` - Inline mode aktivieren
+- `/newgame` - Anweisungen folgen
+

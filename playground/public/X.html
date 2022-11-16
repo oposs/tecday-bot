@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Simplest "game" Ever</title>
+
+    <style>
+
+        .block {
+            display: block;
+            width: 100%;
+            border: none;
+            font-size: 3em;
+            padding: 2em;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .green {
+            background-color: #04AA6D;
+        }
+
+        .red {
+            background-color: #aa040a;
+        }
+    </style>
+</head>
+
+<body>
+<div class="">
+    <button id="click" class="block green" onclick="countUP()">Klick mich <span id="ctr">0</span></button>
+    <button id="die" class="block red" onclick="loose()">Game Over</button>
+</div>
+<script>
+    let count = 0
+    let ctr = document.getElementById("ctr")
+
+    function countUP() {
+        count++;
+        ctr.innerText = count;
+    }
+
+    function loose() {
+        sendScore();
+        count = 0;
+        ctr.innerText = count;
+    }
+
+    function sendScore() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const uid = urlParams.get('uid');
+        const mid = urlParams.get('mid');
+        const cid = urlParams.get('cid');
+        const imid = urlParams.get('imid');
+        if (imid) {
+            const request = new Request(`/setScore?uid=${uid}&imid=${imid}&score=${count}`);
+            fetch(request).then(response => console.log("set score"));
+        } else {
+            const request = new Request(`/setScore?uid=${uid}&mid=${mid}&cid=${cid}&score=${count}`);
+            fetch(request).then(response => console.log("set score"));
+        }
+    }
+</script>
+</body>
+</html>
