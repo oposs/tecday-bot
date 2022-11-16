@@ -1,11 +1,11 @@
-import { newEl } from './popper_util.js';
-import Score from './popper_score.js';
+import { newEl } from './util.js';
+import Score from './score.js';
 
 export default class GameOver {
     static #instance;
     static #rootEl;
     static #scoreEl;
-    static #startGame;
+    static #reStartGame;
     static #score = new Score();
     constructor () {
         if (! GameOver.#instance ) {
@@ -49,7 +49,7 @@ export default class GameOver {
         restart.addEventListener('click',(e) => {
             // no recursion on restart
             this.hide();
-            setTimeout(GameOver.#startGame(),0);
+            setTimeout(GameOver.#reStartGame(),0);
         });       
     }
     show () {
@@ -60,8 +60,8 @@ export default class GameOver {
     hide () {
         GameOver.#rootEl.style.visibility = 'hidden';
     }
-    set startGame (value) {
-        GameOver.#startGame = value;
+    set reStartGame (value) {
+        GameOver.#reStartGame = value;
     }
     #reportScore () {
         const urlParams = new URLSearchParams(window.location.search);

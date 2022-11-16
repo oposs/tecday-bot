@@ -1,7 +1,7 @@
 
-import { setCss, newEl } from './popper_util.js';
-import Score from './popper_score.js';
-import SpriteStore from './popper_spritestore.js';
+import { setCss, newEl } from './util.js';
+import Score from './score.js';
+import SpriteStore from './spritestore.js';
 
 export default class Sprite {
     static #screenWidth = window.innerWidth;

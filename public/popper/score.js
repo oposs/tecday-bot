@@ -1,4 +1,4 @@
-import { newEl } from './popper_util.js';
+import { newEl } from './util.js';
 
 export default class Score {
     static #instance;
