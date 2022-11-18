@@ -1,4 +1,5 @@
 [DEFAULT]
+# Konfiguration für "sanicbot"
 # No trailing slash!
 APP_URL = https://xxxx.ch
 BOT_TOKEN = xxxxxx

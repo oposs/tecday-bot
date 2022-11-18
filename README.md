@@ -1,41 +1,56 @@
 # Tecdays Telegram Bot
 
-Minimal example of a working telegram game bot
+Source code zum Workshop "M37 Ein GameBot für Telegram". In diesem Repostiory findest du folgendes:
 
-```shell
-cd tecdays-bot
+- [QR Code Zähler](playground/qr_code_receiver.py): Zeigt einen QR code mit einem Zähler, welcher um eins erhöht wird,
+  sobald eingescannt
+- [Einfacher Telegram Bot](playground/simple_echo_bot.py): Einfacher Telegram bot welcher auf Nachrichten antworten kann
+  und Katzenbilder versendet
+- [Einfacher Server](playground/simple_server.py): Wird benötigt, wenn ein Telegram Game gebaut werden will
+- [Popper Game](public/popper.html): Ein etwas komplexeres HTML Game
+- [Server + Bot in einem](sanicbot/__init__.py): Vereint den Telegram Bot und den Server
 
-# create python venv
-python3 -m venv venv
+## Anleitung
 
-# activate
-source venv/bin/activate
+1. Python3 installieren:
 
-# install requirements
+- Windows: https://www.python.org/downloads/windows/
+- MacOS: https://www.python.org/downloads/macos/
+- Linux: `apt install python3`
 
-pip install -r requirements.txt
-
-# start server + bot
-
-TOKEN=<telegram_api_token> python3 src/bot.py
-TOKEN=<telegram_api_token> python3 src/server.py
-
-# alternative: start sanic bot
-
-cp sanicbot/config.dist.py sanicbot/config.py
-edit sanicbot/config.py
-./run_sanicbot.sh
-
-```
-
-## Bot erstellen
-- Mit @botfather eine Konversation starten
-- `/start`
-- `/newbot` - Anweisungen folgen
-- Token Aufschreiben
+2. Source code herunter laden:
+    - Wenn du dich mit git auskennst: `git clone https://github.com/oposs/tecdays-bot.git`
+    - Source code als zip herunterladen: Grüner Button "Code", dann "Download ZIP"
+3. Projekt einrichten
+    - Windows: Script [setup_project_win.cmd](setup_project_win.cmd) ausführen
+    - Linux/MacOS: Script [setup_project_mac_linux.sh](setup_project_mac_linux.sh) ausführen
+4. Telegram bot erstellen
+    - Mit [@botfather](https://t.me/botfather) ein Gespräch anfangen
+    - Der Befehl `/newbot` fragt dich nach einen Botnamen + Beschreibung
+    - Das Token (welches in etwa so aussieht: `57xxxxxxxx:AAHRhXvlb0HqgLtZZZUUUHHNNEEDDCCEEFFSASAF`) aufschreiben
+5. Token im file [simple_echo_bot.py](playground/simple_echo_bot.py) und [simple_server.py](playground/simple_server.py)
+   eintragen
+6. Bot starten
+    - Windows: Script [start_echo_bot_win.cmd](playground/start_echo_bot_win.cmd) ausführen
+    - Linux/MacOS: Script [start_echo_bot_linux_mac.sh](playground/start_echo_bot_linux_mac.sh) ausführen
+    
 
 ## Game registrieren
+
 - Mit @botfather eine Konversation starten
 - `/setinline` - Inline mode aktivieren
 - `/newgame` - Anweisungen folgen
 
+## Etwas funktioniert nicht?
+
+Du kannst uns entweder eine Mail an support[at]oetiker[dot]ch schreiben oder wenn Du ein Github account hast hier
+ein [Issue](https://github.com/oposs/tecdays-bot/issues/new) aufmachen.
+
+## Copyright notice
+
+Code is published under [MIT](LICENSE.md)
+
+Cat images are taken from wikipedia:
+
+- [cat1](playground/public/cats/catO1.jpg): Alvesgaspar, 2010 GFDL 1.2
+- [cat2](playground/public/cats/catO2.jpg): Hisashi, 2009 CC Attribution-Share Alike 2.0

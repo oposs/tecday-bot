@@ -4,7 +4,7 @@ from sanic.response import text, empty
 from aiogram import Bot
 from aiogram.utils.exceptions import BadRequest
 
-TOKEN = "XXXXX"
+TOKEN = "5729980052:AAHRhXvlb0HqgLtSzp1ZEV4fp7HHPKxc3qc"
 
 app = Sanic("TecDaysSimpleServer")
 bot = Bot(token=TOKEN)

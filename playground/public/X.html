@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Simplest "game" Ever</title>
-
     <style>
-
         .block {
             display: block;
             width: 100%;
@@ -16,17 +14,14 @@
             cursor: pointer;
             text-align: center;
         }
-
         .green {
             background-color: #04AA6D;
         }
-
         .red {
             background-color: #aa040a;
         }
     </style>
 </head>
-
 <body>
 <div class="">
     <button id="click" class="block green" onclick="countUP()">Klick mich <span id="ctr">0</span></button>
@@ -35,18 +30,15 @@
 <script>
     let count = 0
     let ctr = document.getElementById("ctr")
-
     function countUP() {
         count++;
         ctr.innerText = count;
     }
-
     function loose() {
-        sendScore();
+        //sendScore();
         count = 0;
         ctr.innerText = count;
     }
-
     function sendScore() {
         const urlParams = new URLSearchParams(window.location.search);
         const uid = urlParams.get('uid');

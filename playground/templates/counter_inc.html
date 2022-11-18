@@ -5,13 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Success</title>
 </head>
+<style>
+    div.centered {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 3em;
+    }
+
+    td {
+        text-align: center;
+    }
+</style>
 <body>
-{% if counter == 0 %}
-🎉 Gratuliere, Du warst am schnellsten! 🎉
-{% elif counter == 1 %}
-<p>{{ counter }} Person waren schneller als Du 😭 </p>
-{% else %}
-<p>{{ counter }} Personen waren schneller als Du 😭 </p>
-{% endif %}
+<div class="centered">
+    <table>
+        <tr>
+            <td>
+                {% if counter == 0 %}
+                    🎉
+                {% else %}
+                    😭
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% if counter == 0 %}
+                    Gratuliere, Du warst am schnellsten!
+                {% elif counter == 1 %}
+                    <p>{{ counter }} Person waren schneller als Du</p>
+                {% else %}
+                    <p>{{ counter }} Personen waren schneller als Du</p>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+</div>
+
 </body>
+
 </html>
