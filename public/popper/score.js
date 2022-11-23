@@ -21,9 +21,12 @@ export default class Score {
     get value () {
         return Score.#value;
     }
-
+    reset () {
+        Score.#value = -1;
+        this.up();
+    }
     up () {
         Score.#value++;
         Score.#el.textContent = 'Score: ' + Score.#value;
-    };
+    }
 }
