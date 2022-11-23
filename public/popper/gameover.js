@@ -62,6 +62,7 @@ export default class GameOver {
     }
     set reStartGame (value) {
         GameOver.#reStartGame = value;
+        GameOver.#score.reset();
     }
     #reportScore () {
         const urlParams = new URLSearchParams(window.location.search);
