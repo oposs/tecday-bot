@@ -34,12 +34,24 @@ Source code zum Workshop "M37 Ein GameBot für Telegram". In diesem Repostiory f
     - Windows: Script [start_echo_bot_win.cmd](playground/start_echo_bot_win.cmd) ausführen
     - Linux/MacOS: Script [start_echo_bot_linux_mac.sh](playground/start_echo_bot_linux_mac.sh) ausführen
     
-
 ## Game registrieren
 
 - Mit @botfather eine Konversation starten
 - `/setinline` - Inline mode aktivieren
 - `/newgame` - Anweisungen folgen
+
+## Game Server starten
+
+Damit das Game funktioniert, brauchst brauchst du einen Computer der vom Internet aus direkt erreichbar ist. Da startest du dann den Game Server. Dieser medldet sich bei Telegram an und wartet auf bot requests. Gleichzeitig werden von dem Server auch die Gamefiles ausgeliefert und alfällige Score Updates an Telegram weitergeleitet.
+
+Das Game selbst ist in JavaScript geschrieben und befindet sich im Ordner [public](public). Der Server ist in Python geschrieben und befindet sich im Ordner [sanicbot](sanicbot). Bevor du den Server startest, musst du im `config.ini` file den Token eintragen. Den Token bekommst du von @botfather (siehe oben).
+
+```console
+$ cp config.ini.dist config.ini
+$ vim config.ini
+$ . venv/bin/activate
+$ sanic sanicbot:app -H 0.0.0.0 -p 8080 -d
+```
 
 ## Etwas funktioniert nicht?
 
