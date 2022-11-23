@@ -34,7 +34,9 @@ export default class Sprite {
             ? 'rgba(255,50,255,1)' 
             : 'rgba(0,200,0,1)',
             transition: 'transform 0.5s, background-color 0.5s',
-            zIndex: 10,
+            zIndex: this.#type == 'bad' 
+            ? 10 
+            : 9,
         });
         this.#el.addEventListener('pointerdown', (e) => {
             e.preventDefault();
