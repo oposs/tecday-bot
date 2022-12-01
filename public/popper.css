@@ -14,3 +14,7 @@ body {
     user-select: none;
     user-zoom: fixed;
 }
+/* do not try to do anything with touch !!!! */
+* {
+    touch-action: none;
+}
