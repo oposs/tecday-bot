@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
     <title>The Simplest "game" Ever</title>
     <style>
         .block {
@@ -20,6 +20,9 @@
         .red {
             background-color: #aa040a;
         }
+        * {
+            touch-action: none;
+        }
     </style>
 </head>
 <body>
@@ -35,7 +38,7 @@
         ctr.innerText = count;
     }
     function loose() {
-        //sendScore();
+        sendScore();
         count = 0;
         ctr.innerText = count;
     }

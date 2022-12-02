@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import os
 import random
 from uuid import uuid4
@@ -28,7 +30,7 @@ async def send_welcome(message: types.Message):
                         parse_mode='Markdown')
 
 
-@dp.message_handler(regexp='(cat|katze|regen)')
+@dp.message_handler(regexp='(cat|katze|regen|chatz)')
 async def send_cats(message: types.Message):
     """
     Dieser code wir ausgeführt, wenn in einer Nachricht an den Bot "cat", "katze" oder "regen" vorkommt
@@ -48,6 +50,7 @@ async def send_cats(message: types.Message):
     with open(os.path.join(cat_source_dir, cat), 'rb') as photo:
         # Wir senden die ausgewählte Katze als Bild mit der Bildunterschrift welche unter anderem die eingegange
         # Nachricht enthält
+        logging.info(f"Sende katze an: {message.from_user.first_name}")
         await message.reply_photo(photo, caption=f'Ich habe *{message.text}* gehört', parse_mode='Markdown')
 
 
@@ -58,15 +61,15 @@ async def send_echo(message: types.Message):
     zurückzusenden
     :param message: eingegebene Chat Nachricht
     """
-    logging.info(f"Received: {message.text}")
+    logging.info(f"Erhalten: {message.text} -> Antworte: {message.from_user.first_name}")
     await message.answer(message.text)
 
 
-
-# Der Folgende Codeteil wird benötigt für einen Gamebot
+# # ## Der Folgende Codeteil wird benötigt für einen Gamebot
 # @dp.callback_query_handler(lambda callback_query: callback_query.game_short_name == SHORTGAME_NAME)
 # async def send_game(callback_query: types.CallbackQuery):
 #     uid = str(callback_query.from_user.id)
+#     logging.info(f"Sende game an: {callback_query.from_user.first_name}")
 #     if callback_query.message:
 #         mid = str(callback_query.message)
 #         cid = str(callback_query.id)
@@ -76,11 +79,12 @@ async def send_echo(message: types.Message):
 #         url = "{}?uid={}&imid={}".format(GAME_URL, uid, imid)
 #     logging.info(f"Sent url: {url}")
 #     await bot.answer_callback_query(callback_query.id, url=url)
-#
-#
+# # #
+# # #
 # # @td_gamebot1_bot
 # @dp.inline_handler()
 # async def send_game(inline_query: types.InlineQuery):
+#     logging.info(f"Inline Query von: {inline_query.from_user.first_name}")
 #     await bot.answer_inline_query(inline_query.id,
 #                                   [types.InlineQueryResultGame(id=str(uuid4()),
 #                                                                game_short_name=SHORTGAME_NAME)])
